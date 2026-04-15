@@ -7,9 +7,11 @@ object casa {
         gastosMensuales= gastosMensuales + cantidad
 
     }
+    method gastosMensuales(){
+        return gastosMensuales
+    }
     method depositar(cantidad){
         cuenta.depositarDinero(cantidad)
-        gastosMensuales 
     }
     method cuenta(_cuenta){
         cuenta= _cuenta

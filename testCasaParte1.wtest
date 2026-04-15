@@ -1,6 +1,19 @@
 import casa.*
 
 describe "casa de pepe y julian" {
-
-
+  test "cuenta corriente"{
+    cuentaCorriente.depositarDinero(300)
+    assert.equals(300, cuentaCorriente.saldo())
+    casa.gastosMensuales(0)
+    assert.equals(0, casa.gastosMensuales())
+    casa.extraer(200)
+    assert.equals(100, cuentaCorriente.saldo())
+    assert.equals(200, casa.gastosMensuales())
+    casa.extraer(400)
+    assert.equals(-300, cuentaCorriente.saldo())
+    assert.equals(600, casa.gastosMensuales())
+    casa.cambiarMes()
+    assert.equals(0, casa.gastosMensuales())
+  }
+  
 }
