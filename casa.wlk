@@ -5,6 +5,41 @@ object casa {
     var cantidadDeViveres= 0
     var cantidadDeReparaciones = 0
     var montoPorReparacion = 0
+    var porcentajeAComprar = 0
+    var estrategiaUtilizada = minimoEIndispensable
+
+    method cambiarEstrategiaA(_estrategia){
+        estrategiaUtilizada = _estrategia
+    }
+    method estrategiaUtilizada(){
+        return estrategiaUtilizada
+    }
+
+    method minimoEIndispensable(){
+        if( not self.haySuficientesViveres()){
+            self.comprarViveres(40 - self.cantidadDeViveres(), calidad)
+        }
+    }
+
+    method full(){
+        if (self.casaEstaEnOrden()){
+            self.comprarViveres(100 - self.cantidadDeViveres(), 5)
+        } else if { (not self.casaEstaEnOrden() && self.cantidadDeViveres()< 40)
+         self.comprarViveres(40 - self.cantidadDeViveres(), 5) 
+        }
+        else if {(self.hayQueHacerReparaciones() && cuenta.saldoDeCuenta()> self.montoPorReparaciones())
+            self.hacerReparaciones()
+        }
+    
+    }
+
+    method porcentajeAComprar(){
+        return porcentajeAComprar
+    }
+
+    method porcentajeAComprar(_porcentaje){
+        porcentajeAComprar = _porcentaje
+    }
 
     method montoPorReparaciones(){
         return montoPorReparaciones
@@ -46,6 +81,10 @@ object casa {
     method cantidadDeReparaciones(){
         return cantidadDeReparaciones
 
+    }
+
+    method hayQueHacerReparaciones(){
+        return cantidadDeReparaciones > 0
     }
 
 
@@ -185,5 +224,6 @@ object cuentaCombinada{
     }
         
     }
+
 
 
