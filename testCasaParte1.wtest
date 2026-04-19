@@ -45,6 +45,48 @@ describe "casa de pepe y julian" {
     assert.equals(1040, casa.gastosMensuales())
 
   }
-  
+  test "Probando Estrategia Minimo indispensable"{
+      casa.cantidadDeViveres(30)  
+      casa.cambiarMes()
+      //Al cambiar de mes y ejecutar el mantenimiento, 
+      //no hay saldo suficiente para comprar los víveres, por lo que no se puede realizar. NO PUDE HACERLO//
+      cuentaCombinada.depositar(100)
+      casa.cambiarMes()
+      assert.that(casa.haySuficientesViveres())
+      assert.equals((100), casa.montoPorReparaciones())
+      assert.equals(0, casa.gastosMensuales())
+      assert.equals(50, cuentaCombinada.saldo())
+
+  }
+  test "Probando Estrategia Full"{
+    casa.cambiarEstrategiaA(full)
+    cuentaCorriente.saldo(0)
+    assert.notThat(casa.estaEnOrden())
+    assert.equals(40, casa.cantidadDeViveres())
+    assert.equals(-50, cuenta.saldo())
+    assert.equals(100, casa.montoPorReparaciones())
+    cuentaCorriente.depositarDinero(450)
+    cuentaCorriente.saldo(450)
+    casa.cambiarMes()
+    assert.notThat(casa.estaEnOrden())
+    casa.realizarReparaciones(cantidadDeReparaciones)
+    assert.equals(40, casa.cantidadDeViveres())
+    assert.equals(300, cuentaCorriente.saldo())
+    casa.cambiarMes()
+    casa.comprarViveres(60, 5)
+    assert.equals(100, casa.cantidadDeViveres())
+    assert.equals(0, cuentaCorriente.saldo())
+    casa.cambiarMes()
+    assert.equals(0, casa.porcentajeAComprar())
+    assert.equals(100, casa.cantidadDeViveres())
+    assert.equals(0, cuentaCorriente.saldo())
+
+
+
+
+
+
+
+  }  
 }
 

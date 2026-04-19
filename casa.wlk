@@ -6,7 +6,7 @@ object casa {
     var cantidadDeReparaciones = 0
     var montoPorReparacion = 0
     var porcentajeAComprar = 0
-    var estrategiaUtilizada = minimoEIndispensable
+    var estrategiaUtilizada = self.minimoEIndispensable()
 
     method cambiarEstrategiaA(_estrategia){
         estrategiaUtilizada = _estrategia
@@ -16,6 +16,7 @@ object casa {
     }
 
     method minimoEIndispensable(){
+        var calidad = 1
         if( not self.haySuficientesViveres()){
             self.comprarViveres(40 - self.cantidadDeViveres(), calidad)
         }
@@ -28,7 +29,7 @@ object casa {
          self.comprarViveres(40 - self.cantidadDeViveres(), 5) 
         }
         else if {(self.hayQueHacerReparaciones() && cuenta.saldoDeCuenta()> self.montoPorReparaciones())
-            self.hacerReparaciones()
+            self.realizarReparaciones(cantidadDeReparaciones)
         }
     
     }
@@ -117,7 +118,7 @@ object casa {
     }
     
     method haySuficientesViveres(){
-        return viveres > 40
+        return self.cantidadDeViveres > 40
     }
 }
 
